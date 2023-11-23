@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "lib": ["es2020", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "types": ["react", "react-dom"],
+    "declaration": true,
+    "declarationDir": "./dist"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "tools"]
+}
