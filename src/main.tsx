@@ -24,9 +24,14 @@ const NextMetaConsole = ({ enabled = true }: MetaConsoleProps) => {
     }
 
     const observer = new MutationObserver((mutations) => {
-      console.log(mutations);
+      for (const mutation of mutations) {
+        console.log(mutation.type);
+        for (const addedNode of Array.from(mutation.addedNodes)) {
+          console.log(addedNode);
+        }
+      }
     });
-    observer.observe(document.head, { childList: true, attributes: true });
+    observer.observe(document.head, { childList: true, subtree: true, attributes: true });
 
     return () => observer.disconnect();
   }, []);

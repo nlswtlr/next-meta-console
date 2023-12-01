@@ -2,15 +2,7 @@ import fs from "node:fs";
 import { exec } from "node:child_process";
 import * as esbuild from "esbuild";
 
-export const baseOptions = {
-  bundle: true,
-  entryPoints: ["./src/main.jsx"],
-  outdir: "dist",
-  external: ["react", "react-dom", "next"],
-  target: ["es2020"],
-  format: "esm",
-  treeShaking: true,
-};
+import { baseOptions } from "./build.mjs";
 
 (async () => {
   const ctx = await esbuild.context({

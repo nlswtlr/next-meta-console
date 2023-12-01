@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import MetaConsole from "next-meta-console";
 
 import "./globals.css";
 
@@ -10,7 +11,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="p-6">{children}</body>
+      <body className="p-6">
+        {children}
+        <MetaConsole />
+      </body>
     </html>
   );
 }
