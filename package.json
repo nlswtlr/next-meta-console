@@ -7,7 +7,7 @@
   "types": "dist/main.d.ts",
   "scripts": {
     "dev": "node tools/watch.mjs",
-    "build": "node tools/build.mjs && tsc --emitDeclarationOnly --declaration",
+    "build": "node tools/build.mjs",
     "prepublish": "npm run build"
   },
   "peerDependencies": {

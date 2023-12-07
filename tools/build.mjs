@@ -1,8 +1,9 @@
+import { exec } from "node:child_process";
 import * as esbuild from "esbuild";
 
 export const baseOptions = {
   banner: {
-    js: '"use client";',
+    js: `"use client";`,
   },
   bundle: true,
   entryPoints: ["./src/main.jsx"],
@@ -13,10 +14,17 @@ export const baseOptions = {
   treeShaking: true,
 };
 
+export const buildTypeDeclarationCmd = "tsc --emitDeclarationOnly --declaration";
+
 (async () => {
   await esbuild.build({
     ...baseOptions,
     minify: true,
   });
-  console.log("✓ build finished\n");
+  exec(buildTypeDeclarationCmd, (error) => {
+    if (error) {
+      throw new Error(error);
+    }
+    console.log("✓ build finished\n");
+  });
 })();

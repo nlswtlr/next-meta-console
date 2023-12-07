@@ -5,7 +5,9 @@
     "jsx": "react-jsx",
     "types": ["react", "react-dom"],
     "declaration": true,
-    "declarationDir": "./dist"
+    "declarationDir": "./dist",
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "tools"]

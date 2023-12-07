@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import MetaConsole from "next-meta-console";
+import NextMetaConsole from "next-meta-console";
+import "next-meta-console/dist/main.css";
 
 import "./globals.css";
 
@@ -13,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className="p-6">
         {children}
-        <MetaConsole />
+        <NextMetaConsole enabled={process.env.NODE_ENV === "development"} />
       </body>
     </html>
   );
