@@ -1,6 +1,6 @@
 {
   "name": "next-meta-console",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "type": "module",
   "main": "dist/main.js",
@@ -28,6 +28,6 @@
     "metadata",
     "console"
   ],
-  "author": "Nils Wittler <contact@nilsw.io>",
+  "author": "Nils Wittler <dev@nilsw.io>",
   "license": "MIT"
 }
