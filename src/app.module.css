@@ -4,7 +4,6 @@
   bottom: 20px;
   color: white;
   background-color: #101010;
-  padding: 6px;
   font-size: 0.8rem;
   border-radius: 4px;
   font-family: inherit;
@@ -13,7 +12,7 @@
 .button {
   display: block;
   appearance: none;
-  padding: 0;
+  padding: 6px;
   border: 0;
   background: transparent;
 }
@@ -29,6 +28,10 @@
   background-color: #101010;
   border-radius: 4px;
   padding: 4px;
+}
+
+.tableWrapper {
+  padding: 6px;
 }
 
 .table {

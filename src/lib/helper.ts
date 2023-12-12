@@ -1,5 +1,34 @@
 import type { Actions } from "./reducer";
 
+export function handleMutation(mutation: MutationRecord, dispatch: React.Dispatch<Actions>) {
+  if (mutation.type === "characterData") {
+    return dispatch({ type: "SET_TITLE", payload: mutation.target.textContent || "" });
+  }
+  if (mutation.target.nodeName === "META" && mutation.target instanceof HTMLElement) {
+    return dispatch({ type: "SET_DESC", payload: mutation.target.getAttribute("content") || "" });
+  }
+  mutation.addedNodes.forEach((node) => {
+    if (!(node instanceof HTMLElement)) {
+      return;
+    }
+    const property = node.getAttribute("property");
+
+    if (property === "og:image") {
+      dispatch({ type: "SET_IMAGE", payload: node.getAttribute("content") || "" });
+    }
+  });
+  mutation.removedNodes.forEach((node) => {
+    if (!(node instanceof HTMLElement)) {
+      return;
+    }
+    const property = node.getAttribute("property");
+
+    if (property === "og:image") {
+      dispatch({ type: "SET_IMAGE", payload: "" });
+    }
+  });
+}
+
 export function setInitialState(dispatch: React.Dispatch<Actions>) {
   const elements = {
     title: document.head.querySelector<HTMLMetaElement>("title"),

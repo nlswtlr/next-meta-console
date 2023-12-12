@@ -1,9 +1,9 @@
 import { useEffect, useState, useReducer, Reducer } from "react";
 
 import type { MetaConsoleProps } from "./main";
-import { setInitialState } from "./lib/helper";
+import { setInitialState, handleMutation } from "./lib/helper";
 import reducer, { initialState, State, Actions } from "./lib/reducer";
-import { consoleWrapper, button, svgIcon, table, closeBtn, ogImage } from "./app.module.css";
+import { consoleWrapper, button, svgIcon, tableWrapper, table, closeBtn, ogImage } from "./app.module.css";
 
 /**
  * ------
@@ -21,6 +21,7 @@ const App = ({}: Omit<MetaConsoleProps, "enabled">) => {
 
     const observer = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
+        handleMutation(mutation, dispatch);
       }
     });
     observer.observe(document.head, { attributes: true, childList: true, subtree: true, characterData: true });
@@ -33,7 +34,7 @@ const App = ({}: Omit<MetaConsoleProps, "enabled">) => {
   return (
     <div className={consoleWrapper}>
       {isOpen ? (
-        <div>
+        <div className={tableWrapper}>
           <button className={closeBtn} onClick={() => setIsOpen(false)} aria-label="Close Next.js Meta Console">
             <svg width="8" height="8" viewBox="0 0 30 29" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -59,7 +60,7 @@ const App = ({}: Omit<MetaConsoleProps, "enabled">) => {
                   <td>Image</td>
                   <td>
                     <a href={image} target="_blank">
-                      <img className={ogImage} src={image} alt="" loading="lazy" />
+                      <img className={ogImage} width="1200" height="630" src={image} alt="" loading="lazy" />
                     </a>
                   </td>
                 </tr>
