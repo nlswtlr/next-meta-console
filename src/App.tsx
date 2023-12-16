@@ -1,7 +1,8 @@
 import { useEffect, useState, useReducer, Reducer } from "react";
+import { usePathname } from "next/navigation";
 
 import type { MetaConsoleProps } from "./main";
-import { setInitialState, handleMutation } from "./lib/helper";
+import { queryElements } from "./lib/helper";
 import reducer, { initialState, State, Actions } from "./lib/reducer";
 import { consoleWrapper, button, svgIcon, tableWrapper, table, closeBtn, ogImage } from "./app.module.css";
 
@@ -13,21 +14,13 @@ import { consoleWrapper, button, svgIcon, tableWrapper, table, closeBtn, ogImage
  * Close by Kiki Rizky from https://thenounproject.com/browse/icons/term/close/ (CC BY 3.0)
  */
 const App = ({}: Omit<MetaConsoleProps, "enabled">) => {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [state, dispatch] = useReducer<Reducer<State, Actions>>(reducer, initialState);
 
   useEffect(() => {
-    setInitialState(dispatch);
-
-    const observer = new MutationObserver((mutations) => {
-      for (const mutation of mutations) {
-        handleMutation(mutation, dispatch);
-      }
-    });
-    observer.observe(document.head, { attributes: true, childList: true, subtree: true, characterData: true });
-
-    return () => observer.disconnect();
-  }, [dispatch]);
+    queryElements(dispatch);
+  }, [pathname]);
 
   const { title, description, image } = state;
 
@@ -49,12 +42,10 @@ const App = ({}: Omit<MetaConsoleProps, "enabled">) => {
                 <td>Title</td>
                 <td>{title}</td>
               </tr>
-              {description && (
-                <tr>
-                  <td>Description</td>
-                  <td>{description}</td>
-                </tr>
-              )}
+              <tr>
+                <td>Description</td>
+                <td>{description ? description : "/"}</td>
+              </tr>
               {image && (
                 <tr>
                   <td>Image</td>
